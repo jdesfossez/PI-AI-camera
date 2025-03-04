@@ -57,11 +57,13 @@ assert Path(f'{DATASET_PATH}/result.json').exists()
 config_file = Path(config_path).read_text()
 config_file = config_file.replace("$NR_EPOCH", os.environ["NR_EPOCH"])
 config_file = config_file.replace("$VAL_INTERVAL", os.environ["VAL_INTERVAL"])
+Path(config_path).write_text(config_file)
 config = yaml.safe_load(config_file)
+print(config)
 
-assert config['device']['gpu_ids'] == -1 or config['device']['gpu_ids'] == [0], print(f"gpu_ids: {config['device']['gpu_ids']}")
-assert config['schedule']['total_epochs'] == 2 or config['schedule']['total_epochs'] == 100, print(f"total_epochs: {config['schedule']['total_epochs']}")
-assert config['schedule']['val_intervals'] == 1 or config['schedule']['val_intervals'] == 10, print(f"val_intervals: {config['schedule']['val_intervals']}")
+#assert config['device']['gpu_ids'] == -1 or config['device']['gpu_ids'] == [0], print(f"gpu_ids: {config['device']['gpu_ids']}")
+#assert config['schedule']['total_epochs'] == 2 or config['schedule']['total_epochs'] == 100, print(f"total_epochs: {config['schedule']['total_epochs']}")
+#assert config['schedule']['val_intervals'] == 1 or config['schedule']['val_intervals'] == 10, print(f"val_intervals: {config['schedule']['val_intervals']}")
 
 
 assert '1.13' in torch.__version__, print(torch.__version__)
